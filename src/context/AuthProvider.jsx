@@ -91,6 +91,8 @@ const AuthProvider = ({ children }) => {
         service.servicio,
         service.modelo,
         service.marca,
+        service.imei,
+        service.sn,
         service.precio,
         service.abono,
         service.fecha,

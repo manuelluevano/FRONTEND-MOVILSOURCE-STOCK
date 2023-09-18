@@ -15,6 +15,8 @@ const FormularioServicio = ({ fecha }) => {
   const [servicio, setServicio] = useState("");
   const [modelo, setModelo] = useState("");
   const [marca, setMarca] = useState("");
+  const [imei, setImei] = useState("");
+  const [sn, setSN] = useState("");
   const [precio, setPrecio] = useState("");
   const [abono, setAbono] = useState("");
   const [folio, setFolio] = useState("");
@@ -55,6 +57,8 @@ const FormularioServicio = ({ fecha }) => {
       servicio,
       modelo,
       marca,
+      imei,
+      sn,
       precio,
       abono,
       fecha,
@@ -90,6 +94,8 @@ const FormularioServicio = ({ fecha }) => {
     setServicio("");
     setModelo("");
     setMarca("");
+    setImei("")
+    setSN("")
     setPrecio("");
     setAbono("");
     setFolio("");
@@ -218,6 +224,46 @@ const FormularioServicio = ({ fecha }) => {
                 placeholder="Modelo"
                 value={modelo.toUpperCase()}
                 onChange={(e) => setModelo(e.target.value)}
+              />
+            </div>
+
+            <div className="mb-5">
+              <label
+                htmlFor="imei"
+                className="block font-bold text-gray-700 uppercase"
+              >
+                IMEI
+              </label>
+              <input
+                id="imei"
+                type="text"
+                className={`${
+                  msg && !imei ? "border-red-400" : ""
+                } border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md`}
+                placeholder="355565..."
+                maxLength={16}
+                value={imei.toUpperCase()}
+                onChange={(e) => setImei(e.target.value)}
+              />
+            </div>
+
+            <div className="mb-5">
+              <label
+                htmlFor="sn"
+                className="block font-bold text-gray-700 uppercase"
+              >
+                SN
+              </label>
+              <input
+                id="sn"
+                type="text"
+                className={`${
+                  msg && !sn ? "border-red-400" : ""
+                } border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md`}
+                placeholder="FZAS"
+                maxLength={16}
+                value={sn.toUpperCase()}
+                onChange={(e) => setSN(e.target.value)}
               />
             </div>
 

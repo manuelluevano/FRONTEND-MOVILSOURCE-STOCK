@@ -3,7 +3,7 @@
 import Card from "./Card";
 
 const ListCard = ({ refacciones }) => {
-    console.log("Total de lista de refacciones",refacciones);
+    // console.log("Total de lista de refacciones",refacciones);
   return (
     <>
       {refacciones && refacciones.length ? (
@@ -11,7 +11,7 @@ const ListCard = ({ refacciones }) => {
           {refacciones.map((item) => {
             return (
               <>
-                <Card key={item.id} item={item} />
+                <Card item={item} />
               </>
             );
           })}

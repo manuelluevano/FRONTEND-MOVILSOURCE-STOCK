@@ -14,15 +14,15 @@ const ListaServicios = ({
   return (
     <div className="md:w-1/2 lg:w-3/5 mt-10 h-screen md:overflow-y-scroll">
       {reload && (
-        <div className="text-center mb-10 text-3xl text-green-700">
-          📲 Servicio Agregado/Actualizado ... 📲
-        </div>
+        <p className="text-center mb-10 text-3xl text-green-700">
+          <div>📲 Servicio Agregado/Actualizado ... 📲</div>
+        </p>
       )}
 
-      <p className="text-right mr-2 ">
+        <p className="text-right mr-2 ">
         Total:
         <span className="ml-2 text-2xl">{contador}</span>
-      </p>
+      </p> 
       <p className="text-right mr-2 mb-1">
         Finalizados:
         <span className=" ml-2 text-green-700 text-2xl">
@@ -34,7 +34,7 @@ const ListaServicios = ({
         <span className=" ml-2 text-red-700 text-2xl">{servicesPendient}</span>
       </p>
       {/* BUSCADOR */}
-      <p className="text-lg mb-5">
+       <div className="text-lg mb-5">
         <label
           htmlFor="default-search"
           className="text-sm font-medium text-gray-900 sr-only dark:text-white"
@@ -75,17 +75,17 @@ const ListaServicios = ({
             Buscar
           </button>
         </div>
-      </p>
+      </div> 
 
       {listaServicios ? (
         <>
           <h2 className="font-black text-3xl text-center">
             Lista de Servicios
           </h2>
-          <p className="text-lg mt-5 text-center mb-10">
+          <div className="text-lg mt-5 text-center mb-10">
             Administra tus{" "}
             <span className="text-orange-600 font-bold ">Servicios</span>
-          </p>
+          </div>
 
           {listaServicios &&
             listaServicios.map((item) => {

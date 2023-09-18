@@ -9,7 +9,6 @@ import { Toaster } from "sonner";
 const Refacciones = () => {
   //OBTENER LAS REFACCIONES DE LA DB
   const [refacciones, setRefacciones] = useState([]);
-  const [file, setFile] = useState();
 
   useEffect(() => {
     (async () => {
@@ -19,19 +18,7 @@ const Refacciones = () => {
     })();
   }, []);
 
-  function handleSubmit(e) {
-    console.log(e.target.files);
-    setFile(URL.createObjectURL(e.target.files[0]));
-    const formData = new FormData();
-    formData.append("fileupload", e.target.files[0]);
-
-    fetch("http://localhost:3000/api/refaccion/upload" +  {
-      method: "POST",
-
-      body: formData,
-      dataType: "json",
-    });
-  }
+ 
 
   return (
     <>
@@ -57,11 +44,7 @@ const Refacciones = () => {
         <ListCard refacciones={refacciones} />
       </div>
 
-      <div className="App">
-        <h2>Add Image:</h2>
-        <input type="file" onChange={handleSubmit} />
-        <img src={file} />
-      </div>
+     
     </>
   );
 };

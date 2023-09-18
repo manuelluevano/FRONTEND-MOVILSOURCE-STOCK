@@ -19,7 +19,8 @@
     "react-router-dom": "^6.14.2",
     "react-select": "^5.7.4",
     "sonner": "^0.7.0",
-    "update": "^0.7.4"
+    "update": "^0.4.2",
+    "axios": "^1.2.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.15",

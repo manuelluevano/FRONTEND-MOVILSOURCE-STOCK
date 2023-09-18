@@ -12,6 +12,8 @@ const Servicio = ({ item }) => {
     name,
     modelo,
     marca,
+    imei,
+    sn,
     telefono,
     precio,
     abono,
@@ -31,6 +33,8 @@ const Servicio = ({ item }) => {
   const [servicioNew, setServicio] = useState("");
   const [modeloNew, setModelo] = useState("");
   const [marcaNew, setMarca] = useState("");
+  const [imeiNew, setImei] = useState("");
+  const [snNew, setSN] = useState("");
   const [precioNew, setPrecio] = useState("");
   const [abonoNew, setAbono] = useState("");
   const [folioNew, setFolio] = useState("");
@@ -84,6 +88,8 @@ const Servicio = ({ item }) => {
       setTelefono(telefono);
       setMarca(marca);
       setModelo(modelo);
+      setImei(imeiNew);
+      setSN(snNew);
       setServicio(servicio);
       setPrecio(precio);
       setFolio(folio);
@@ -103,6 +109,8 @@ const Servicio = ({ item }) => {
           marcaNew,
           modeloNew,
           servicioNew,
+          imeiNew,
+          snNew,
           precioNew,
           folioNew,
           observacionesNew,
@@ -151,7 +159,7 @@ const Servicio = ({ item }) => {
               reload ? "bg-gray-100" : ""
             } m-3 shadow-md px-5 py-10 rounded-xl`}
           >
-            <p className="font-bold mb-3 text-gray-700 uppercase">
+            <div className="font-bold mb-3 text-gray-700 uppercase">
               Nombre Cliente: {""}
               <span className="font-normal normal-case">
                 {edit ? (
@@ -164,8 +172,8 @@ const Servicio = ({ item }) => {
                   name
                 )}
               </span>
-            </p>
-            <p className="font-bold mb-3 text-gray-700 uppercase">
+            </div>
+            <div className="font-bold mb-3 text-gray-700 uppercase">
               Telefono: {""}
               <span className="font-normal normal-case">
                 {edit ? (
@@ -178,8 +186,8 @@ const Servicio = ({ item }) => {
                   telefono
                 )}
               </span>
-            </p>
-            <p className="font-bold mb-3 text-gray-700 uppercase">
+            </div>
+            <div className="font-bold mb-3 text-gray-700 uppercase">
               Marca: {""}
               <span className="font-normal normal-case">
                 {edit ? (
@@ -195,8 +203,8 @@ const Servicio = ({ item }) => {
                   marca
                 )}
               </span>
-            </p>
-            <p className="font-bold mb-3 text-gray-700 uppercase">
+            </div>
+            <div className="font-bold mb-3 text-gray-700 uppercase">
               Modelo: {""}
               <span className="font-normal normal-case">
                 {edit ? (
@@ -209,9 +217,47 @@ const Servicio = ({ item }) => {
                   modelo
                 )}
               </span>
-            </p>
+            </div>
 
-            <p className="font-bold mb-3 text-gray-700 uppercase">
+            {imei ? (
+              <div className="font-bold mb-3 text-gray-700 uppercase">
+                IMEI: {""}
+                <span className="font-normal normal-case">
+                  {edit ? (
+                    <input
+                      type="text"
+                      value={imeiNew.toUpperCase()}
+                      onChange={(e) => setImei(e.target.value.toUpperCase())}
+                    />
+                  ) : (
+                    imei
+                  )}
+                </span>
+              </div>
+            ) : (
+              ""
+            )}
+
+            {sn ? (
+              <div className="font-bold mb-3 text-gray-700 uppercase">
+                SN: {""}
+                <span className="font-normal normal-case">
+                  {edit ? (
+                    <input
+                      type="text"
+                      value={snNew.toUpperCase()}
+                      onChange={(e) => setSN(e.target.value.toUpperCase())}
+                    />
+                  ) : (
+                    sn
+                  )}
+                </span>
+              </div>
+            ) : (
+              ""
+            )}
+
+            <div className="font-bold mb-3 text-gray-700 uppercase">
               Servicio: {""}
               <span className="font-normal normal-case">
                 {edit ? (
@@ -226,9 +272,9 @@ const Servicio = ({ item }) => {
                   servicio
                 )}
               </span>
-            </p>
+            </div>
 
-            <p className="font-bold mb-3 text-gray-700 uppercase">
+            <div className="font-bold mb-3 text-gray-700 uppercase">
               Precio: ${""}
               <span className="font-normal normal-case">
                 {edit ? (
@@ -241,11 +287,11 @@ const Servicio = ({ item }) => {
                   precio
                 )}
               </span>
-            </p>
+            </div>
             {abono == 0 ? (
               ""
             ) : (
-              <p className="font-bold mb-3 text-gray-700 uppercase">
+              <div className="font-bold mb-3 text-gray-700 uppercase">
                 Abono:{abono === precio ? " " : " $"}
                 <span className="font-normal normal-case">
                   {edit ? (
@@ -258,10 +304,10 @@ const Servicio = ({ item }) => {
                     abono
                   )}
                 </span>
-              </p>
+              </div>
             )}
 
-            <p className="font-bold mb-3 text-gray-700 uppercase">
+            <div className="font-bold mb-3 text-gray-700 uppercase">
               Folio: {""}
               <span className="font-normal normal-case">
                 {edit ? (
@@ -274,8 +320,8 @@ const Servicio = ({ item }) => {
                   folio
                 )}
               </span>
-            </p>
-            <p className="font-bold mb-3 text-gray-700 uppercase">
+            </div>
+            <div className="font-bold mb-3 text-gray-700 uppercase">
               Observaciones: {""}
               <span className="font-normal normal-case">
                 {edit ? (
@@ -290,12 +336,12 @@ const Servicio = ({ item }) => {
                   observaciones
                 )}
               </span>
-            </p>
-            <p className="font-bold mb-3 text-gray-700 uppercase">
+            </div>
+            <div className="font-bold mb-3 text-gray-700 uppercase">
               Fecha: {""}
               <span className="font-normal normal-case">{fecha}</span>
-            </p>
-            <p className="font-bold mb-3 text-gray-700 uppercase">
+            </div>
+            <div className="font-bold mb-3 text-gray-700 uppercase">
               Tecnico / Vendedor: {""}
               <span
                 className={`${
@@ -304,10 +350,10 @@ const Servicio = ({ item }) => {
               >
                 {user.email}{" "}
               </span>
-            </p>
+            </div>
             <div className="flex  ">
-              <p className="font-bold  text-gray-700 uppercase">Estado: </p>
-              <p className="font-bold  text-gray-700 uppercase">
+              <div className="font-bold  text-gray-700 uppercase">Estado: </div>
+              <div className="font-bold  text-gray-700 uppercase">
                 {status ? (
                   <h1 className="text-green-700  normal-case ml-2 ">
                     Entregado correctamente
@@ -317,7 +363,7 @@ const Servicio = ({ item }) => {
                     Pendiente por entregar
                   </h1>
                 )}
-              </p>
+              </div>
             </div>
 
             <div className="flex justify-between mt-5">
@@ -354,7 +400,7 @@ const Servicio = ({ item }) => {
                   }
                   onClick={() => handleTerminar(item)}
                 >
-                  {item.status ? <p className="text-4xl ">✔️</p> : "LISTO"}
+                  {item.status ? <div className="text-4xl ">✔️</div> : "LISTO"}
                 </button>
               )}
             </div>

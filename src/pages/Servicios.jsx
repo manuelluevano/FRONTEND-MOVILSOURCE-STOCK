@@ -7,7 +7,6 @@ import { Navigate, useLoaderData } from "react-router-dom";
 import { handleDate } from "../helpers";
 import { Toaster } from "sonner";
 
-// eslint-disable-next-line react-refresh/only-export-components
 export async function loader() {
   //OBTENER FECHA ACTUAL
   const f = await handleDate();
@@ -24,14 +23,12 @@ const Servicios = () => {
   const [listaServicios, setListaServicios] = useState([]);
   const [search, setSearch] = useState();
 
-  // console.log(tokenUser);
 
   useEffect(() => {
     (async () => {
       if (search) {
         console.log("search, VALOR", search);
         const response = await searchService(search);
-        // console.log(response.services);
         setListaServicios();
         setListaServicios(response);
         return;
@@ -40,7 +37,6 @@ const Servicios = () => {
         //OBTENER LISTA DE SERVICIOS
         const response = await listServices(token);
         setListaServicios(response);
-        // console.log(response);
       }
       //REGRESAR RELOAD A ESTADO NORMAL
       setTimeout(() => {

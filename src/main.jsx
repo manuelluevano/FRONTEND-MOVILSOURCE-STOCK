@@ -22,7 +22,7 @@ import Perfil from "./pages/Perfil";
 import Servicios from "./pages/Servicios";
 import Refacciones from "./pages/Refacciones";
 import Accesorios from "./pages/Accesorios";
-import AddRefaccion from "./pages/AddRefaccion";
+import UploadImage from "./pages/UploadImage";
 
 const router = createHashRouter([
   {
@@ -69,7 +69,7 @@ const router = createHashRouter([
       },
       {
         path: "/add-refaccion",
-        element: <AddRefaccion />,
+        element: <UploadImage />,
         errorElement: <ErrorElement />,
         // loader: serviceLoader
       },

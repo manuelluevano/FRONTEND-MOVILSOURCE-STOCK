@@ -56,6 +56,8 @@ export async function addService(
   servicio,
   modelo,
   marca,
+  imei,
+  sn,
   precio,
   abono,
   fecha,
@@ -79,6 +81,8 @@ export async function addService(
         servicio,
         marca,
         modelo,
+        imei,
+        sn,
         precio,
         abono,
         fecha,
@@ -171,7 +175,8 @@ export async function searchService(search) {
 export async function updateService(id, objterminado) {
   //DESTRUCTURING DEL  OBJETO
 
-  const {  nameNew,
+  const {
+    nameNew,
     telefonoNew,
     marcaNew,
     modeloNew,
@@ -179,8 +184,9 @@ export async function updateService(id, objterminado) {
     precioNew,
     folioNew,
     abonoNew,
-    observacionesNew } = objterminado;
-  console.log("DATOS OBTENIDOS", id,nameNew);
+    observacionesNew,
+  } = objterminado;
+  console.log("DATOS OBTENIDOS", id, nameNew);
 
   const token = localStorage.getItem("token");
   let finalString = token.split('"').join("");
@@ -192,7 +198,7 @@ export async function updateService(id, objterminado) {
       method: "PUT",
       redirect: "follow",
       body: JSON.stringify({
-        name:nameNew,
+        name: nameNew,
         telefono: telefonoNew,
         servicio: servicioNew,
         marca: marcaNew,
@@ -200,7 +206,7 @@ export async function updateService(id, objterminado) {
         precio: precioNew,
         abono: abonoNew,
         folio: folioNew,
-        observaciones: observacionesNew
+        observaciones: observacionesNew,
       }),
       headers: {
         "Content-type": "application/json; charset=UTF-8",
@@ -234,8 +240,8 @@ export async function listRefacciones() {
       },
     };
 
-    // const url = `https://lovely-duck-spacesuit.cyclic.app/api/refaccion/refacciones`;
-    const url = `http://localhost:3000/api/refaccion/refacciones`;
+    const url = `https://lovely-duck-spacesuit.cyclic.app/api/refaccion/refacciones`;
+    // const url = `http://localhost:3000/api/refaccion/refacciones`;
 
     const response = await fetch(url, requestOptions);
     const result = await response.json();
@@ -244,20 +250,18 @@ export async function listRefacciones() {
     console.log("error al traer lista refacciones", error);
   }
 }
-export async function addRefaccion(
+export async function addNewRefaccion(
   refaccion,
   modelo,
   marca,
   calidad,
   precio,
   stock,
-  token
+  imagen
 ) {
-  console.log("token", token);
-
-  let finalString = token.split('"').join("");
-
-  console.log("token modificado", finalString);
+  //GET TOKEN
+  // const token = localStorage.getItem("token");
+  // let finalString = token.split('"').join("");
 
   try {
     var requestOptions = {
@@ -270,20 +274,22 @@ export async function addRefaccion(
         calidad,
         precio,
         stock,
+        imagen,
       }),
       headers: {
         "Content-type": "application/json; charset=UTF-8",
-        Authorization: `${finalString}`,
+        // Authorization: `${finalString}`,
       },
     };
 
-    // const url = `https://lovely-duck-spacesuit.cyclic.app/api/refaccion/refaccion`;
-    const url = "http://localhost:3000/api/refaccion/refaccion"
+    const url = `https://lovely-duck-spacesuit.cyclic.app/api/refaccion/refaccion`;
+    // const url = `http://localhost:3000/api/refaccion/refaccion`;
+
     const response = await fetch(url, requestOptions);
     const result = await response.json();
     return result;
   } catch (error) {
-    console.log("error login", error);
+    console.log("error al crear refaccion", error);
   }
 }
 
