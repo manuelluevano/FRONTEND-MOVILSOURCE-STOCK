@@ -6,10 +6,10 @@ const Card = ({ item }) => {
 
   return (
     <>
-      <div className="mt-10 mr-5  max-w-xs border border-gray-200 rounded-lg shadow  ">
-        <div>
+      <div className="mt-10 mr-5 p-1 max-w-xs border border-gray-200 rounded-lg shadow  ">
+        <div className="">
             <img
-            className=" h-40 w-auto mx-auto text-center "
+            className="text-center "
               src={`${imagen}`}
               alt="Imagen no disponible"
             />
