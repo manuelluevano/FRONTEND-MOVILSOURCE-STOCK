@@ -292,6 +292,30 @@ export async function addNewRefaccion(
     console.log("error al crear refaccion", error);
   }
 }
+export async function searchRefaccion(search) {
+  //GET TOKEN
+  // const token = localStorage.getItem("token");
+  // let finalString = token.split('"').join("");
+  try {
+    var requestOptions = {
+      method: "GET",
+      redirect: "follow",
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+        // Authorization: `${finalString}`,
+      },
+    };
+
+    // const url = `http://localhost:3000/api/refaccion/refacciones/${search}`;
+    const url = `https://lovely-duck-spacesuit.cyclic.app/api/refaccion/refacciones/${search}`;
+
+    const response = await fetch(url, requestOptions);
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    console.log("error search", error);
+  }
+}
 
 //PRECIO DOLAR
 export async function precioDolar() {

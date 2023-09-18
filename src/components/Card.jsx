@@ -4,6 +4,8 @@ const Card = ({ item }) => {
   const { _id, imagen, refaccion, modelo, marca, calidad, precio, stock } =
     item;
 
+    // console.log("item", refaccion);
+
   return (
     <>
       <div className="mt-10 mr-5 p-1 max-w-xs border border-gray-200 rounded-lg shadow  ">

@@ -3,7 +3,7 @@
 import Card from "./Card";
 
 const ListCard = ({ refacciones }) => {
-    // console.log("Total de lista de refacciones",refacciones);
+  // console.log("Total de lista de refacciones",refacciones);
   return (
     <>
       {refacciones && refacciones.length ? (
