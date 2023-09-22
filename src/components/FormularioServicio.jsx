@@ -237,9 +237,7 @@ const FormularioServicio = ({ fecha }) => {
               <input
                 id="imei"
                 type="text"
-                className={`${
-                  msg && !imei ? "border-red-400" : ""
-                } border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md`}
+                className="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
                 placeholder="355565..."
                 maxLength={16}
                 value={imei.toUpperCase()}
@@ -257,9 +255,8 @@ const FormularioServicio = ({ fecha }) => {
               <input
                 id="sn"
                 type="text"
-                className={`${
-                  msg && !sn ? "border-red-400" : ""
-                } border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md`}
+                className="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
+
                 placeholder="FZAS"
                 maxLength={16}
                 value={sn.toUpperCase()}

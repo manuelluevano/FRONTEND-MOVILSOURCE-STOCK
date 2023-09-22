@@ -19,10 +19,10 @@ const ListaServicios = ({
         </p>
       )}
 
-        <p className="text-right mr-2 ">
+      <p className="text-right mr-2 ">
         Total:
         <span className="ml-2 text-2xl">{contador}</span>
-      </p> 
+      </p>
       <p className="text-right mr-2 mb-1">
         Finalizados:
         <span className=" ml-2 text-green-700 text-2xl">
@@ -34,10 +34,10 @@ const ListaServicios = ({
         <span className=" ml-2 text-red-700 text-2xl">{servicesPendient}</span>
       </p>
       {/* BUSCADOR */}
-       <div className="text-lg mb-5">
+      <div className="text-lg mb-5">
         <label
           htmlFor="default-search"
-          className="text-sm font-medium text-gray-900 sr-only dark:text-white"
+          className="text-sm font-medium  text-gray-400 sr-only dark:text-white"
         >
           Search
         </label>
@@ -62,7 +62,8 @@ const ListaServicios = ({
           <input
             type="search"
             id="default-search"
-            className="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-500 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            className="block w-full justify-center items-center p-4 pl-10 text-sm bg-gray-200 border-b-2 border-gray-500
+"
             placeholder="Display iPhone..."
             required
             value={search}
@@ -75,7 +76,7 @@ const ListaServicios = ({
             Buscar
           </button>
         </div>
-      </div> 
+      </div>
 
       {listaServicios ? (
         <>

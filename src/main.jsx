@@ -68,7 +68,7 @@ const router = createHashRouter([
         loader: serviceLoader
       },
       {
-        path: "/add-refaccion",
+        path: "/add-refaccion/:id?",
         element: <UploadImage />,
         errorElement: <ErrorElement />,
         // loader: serviceLoader

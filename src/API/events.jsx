@@ -250,6 +250,28 @@ export async function listRefacciones() {
     console.log("error al traer lista refacciones", error);
   }
 }
+export async function getRefaccionID(id) {
+
+  try {
+    var requestOptions = {
+      method: "get",
+      redirect: "follow",
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
+    };
+
+    // const url = `https://lovely-duck-spacesuit.cyclic.app/api/refaccion/refacciones`;
+    const url = `http://localhost:3000/api/refaccion/refaccionDetail/${id}`;
+
+    const response = await fetch(url, requestOptions);
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    console.log("error al traer lista refacciones", error);
+  }
+}
+
 export async function addNewRefaccion(
   refaccion,
   modelo,
@@ -290,6 +312,43 @@ export async function addNewRefaccion(
     return result;
   } catch (error) {
     console.log("error al crear refaccion", error);
+  }
+}
+export async function editService(id, objterminado) {
+  //DESTRUCTURING DEL  OBJETO
+
+  const { refaccionNew, marcaNew, calidadNew, precioNew, stockNew } =
+    objterminado;
+
+  // const token = localStorage.getItem("token");
+  // let finalString = token.split('"').join("");
+
+  // console.log("token modificado", finalString);
+
+  try {
+    var requestOptions = {
+      method: "PUT",
+      redirect: "follow",
+      body: JSON.stringify({
+        refaccion: refaccionNew,
+        marca: marcaNew,
+        calidad: calidadNew,
+        precio: precioNew,
+        stock: stockNew,
+      }),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+        // Authorization: `${finalString}`,
+      },
+    };
+
+    // const url = `https://lovely-duck-spacesuit.cyclic.app/api/service/servicio/${id}`;
+    const url = `http://localhost:3000/api/refaccion/refaccion/${id}`;
+    const response = await fetch(url, requestOptions);
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    console.log("error login", error);
   }
 }
 export async function searchRefaccion(search) {

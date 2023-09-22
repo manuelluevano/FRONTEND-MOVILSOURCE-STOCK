@@ -7,6 +7,7 @@ import { Navigate, useLoaderData } from "react-router-dom";
 import { handleDate } from "../helpers";
 import { Toaster } from "sonner";
 
+// eslint-disable-next-line react-refresh/only-export-components
 export async function loader() {
   //OBTENER FECHA ACTUAL
   const f = await handleDate();
@@ -62,6 +63,7 @@ const Servicios = () => {
             <FormularioServicio
               fecha={datos}
             />
+
             <ListaServicios
               listaServicios={listaServicios.services}
               contador={listaServicios.contador}

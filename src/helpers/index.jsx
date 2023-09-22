@@ -191,6 +191,14 @@ export const servicios = [
     value: "REMANUFACTURA DE PANTALLA",
   },
   {
+    label: "GARANTIA",
+    value: "GARANTIA",
+  },
+  {
+    label: "DIAGNOSTICO",
+    value: "DIAGNOSTICO",
+  },
+  {
     label: "OTRO",
     value: "OTRO",
   },
@@ -213,8 +221,12 @@ export const refacciones = [
     value: "FLEX CARGA",
   },
   {
-    label: "TAPA + CHASIS ORIGINAL",
-    value: "TAPA + CHASIS ORIGINAL",
+    label: "TAPA ORIGINAL",
+    value: "TAPA ORIGINAL",
+  },
+  {
+    label: "CHASIS ORIGINAL",
+    value: "CHASIS ORIGINAL",
   },
   {
     label: "TAPA GENEFICA",
@@ -223,6 +235,18 @@ export const refacciones = [
   {
     label: "FLEX ENCENDIDO",
     value: "FLEX ENCENDIDO",
+  },
+  {
+    label: "FLEX CAMARA FRONTAL",
+    value: "FLEX CAMARA FRONTAL ",
+  },
+  {
+    label: "FLEX AUDICULAR",
+    value: "FLEX AUDICULAR",
+  },
+  {
+    label: "FLEX HOME",
+    value: "FLEX HOME",
   },
   {
     label: "HUELLA",
@@ -237,7 +261,7 @@ export const refacciones = [
     value: "PIN DE CARGA TIPO C",
   },
   {
-    label: "GLASS",
+    label: "GLASS", 
     value: "GLASS",
   },
   {
@@ -253,14 +277,26 @@ export const refacciones = [
     value: "MICROFONO",
   },
   {
-    label: "CAMARAS",
-    value: "CAMARAS",
+    label: "CAMARA TRASERA",
+    value: "CAMARA TRASERA",
+  },
+  {
+    label: "BOCINA / ALTAVOZ",
+    value: "BOCINA / ALTAVOZ",
+  },
+  {
+    label: "REPUESTO TORNILLOS",
+    value: "REPUESTO TORNILLOS",
   },
 ];
 export const calidades = [
   {
     label: "ORIGINAL",
     value: "ORIGINAL",
+  },
+  {
+    label: "CALIDAD ORIGINAL",
+    value: "CALIDAD ORIGINAL",
   },
   {
     label: "GENERICO",
@@ -273,6 +309,10 @@ export const calidades = [
   {
     label: "OLED",
     value: "OLED",
+  },
+  {
+    label: "IPS",
+    value: "IPS",
   }
 ];
 export function handleMessage() {

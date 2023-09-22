@@ -7,6 +7,7 @@ import useAuth from "../hooks/useAuth";
 import { MdAccountCircle, MdExitToApp } from "react-icons/md";
 import { useLoaderData } from "react-router-dom";
 import { precioDolar } from "../API/events";
+import { useState } from "react";
 
 export async function loader() {
   // MULTIPLES CONSULTAS SIMULTANEAS
@@ -22,8 +23,17 @@ export async function loader() {
 }
 
 const Headers = () => {
+  // const [precio, setPrecio] = useState();
   const { setTokenUser, tokenUser } = useAuth();
   const datos = useLoaderData();
+
+
+//   if (datos.precio1 == undefined) {
+//     console.log("no hayt datos");
+//     setPrecio("");
+// return
+//   }
+
   const navigate = useNavigate();
 
   const location = useLocation();
@@ -35,7 +45,7 @@ const Headers = () => {
 
   return (
     <>
-      <header className="border-b bg-black  mb-10">
+      <header className=" bg-black">
         <div className="md:flex md:justify-between items-center ml-10 mr-10">
           <Link onClick={() => navigate("/")}>
             <img src={logo} width={80} />
@@ -104,24 +114,28 @@ const Headers = () => {
                 </Link>
 
                 <div className=" text-green-500">
-                  {datos.precio1.base} {datos.precio1["rates"]["MXN"]}
+                  {/* {precio} */}
                 </div>
                 <div className="flex items-center">
-                  <Link to="/perfil" className={`${
-                    location.pathname === "/perfil"
-                      ? "text-orange-600"
-                      : "text-white"
-                  } uppercase mr-2 text-3xl rounded cursor-pointe transition-colors`}>
-                      <MdAccountCircle />
+                  <Link
+                    to="/perfil"
+                    className={`${
+                      location.pathname === "/perfil"
+                        ? "text-orange-600"
+                        : "text-white"
+                    } uppercase mr-2 text-3xl rounded cursor-pointe transition-colors`}
+                  >
+                    <MdAccountCircle />
                   </Link>
                   <p className="text-white  uppercase">
                     {tokenUser && tokenUser.name + " " + tokenUser.surname}
                   </p>
                 </div>
-                <button onClick={cerrarSesion}
-                  className={`uppercase mr-2 text-3xl text-white hover:text-red-500 rounded cursor-pointe transition-colors`}>
-                   <MdExitToApp/>
-
+                <button
+                  onClick={cerrarSesion}
+                  className={`uppercase mr-2 text-3xl text-white hover:text-red-500 rounded cursor-pointe transition-colors`}
+                >
+                  <MdExitToApp />
                 </button>
               </nav>
             </>
@@ -135,6 +149,5 @@ const Headers = () => {
 };
 
 export default Headers;
-
 
 //ACTUALIZADO

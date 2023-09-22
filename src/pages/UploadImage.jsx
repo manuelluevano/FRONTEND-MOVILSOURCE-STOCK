@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 // eslint-disable-next-line react/prop-types
 import Select from "react-select";
 import { useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 //HELPERS
 import {
@@ -13,10 +14,11 @@ import {
 import useAuth from "../hooks/useAuth";
 import Error from "../components/Error";
 import { Toaster, toast } from "sonner";
-import { addNewRefaccion } from "../API/events";
+import { addNewRefaccion, editService, getRefaccionID } from "../API/events";
 
 export default function UploadImage() {
-  
+  const params = useParams();
+
   const navigate = useNavigate();
 
   const [refaccion, setRefaccion] = useState("");
@@ -27,7 +29,7 @@ export default function UploadImage() {
   const [stock, setStock] = useState("");
   const [imagen, setImagen] = useState("");
   const [imagenPreviw, setImagenPreview] = useState(null);
-
+  const [refaccionEdit, setRefaccionEdit] = useState("");
   //CONTEXT
   const { mostrarAlerta, alerta } = useAuth();
 
@@ -86,19 +88,22 @@ export default function UploadImage() {
       error: "Error",
     });
 
-    //reiniciar el formulario
-    setRefaccion("");
-    setModelo("");
-    setMarca("");
-    setCalidad("");
-    setPrecio("");
-    setStock("");
-    setImagen("");
-
+    if (response.status === "success") {
+      //reiniciar el formulario
+      setRefaccion("");
+      setModelo("");
+      setMarca("");
+      setCalidad("");
+      setPrecio("");
+      setStock("");
+      setImagen("");
+    }
     //REGRESAR A REFACCIONES
-    setTimeout(() => {
-      navigate("/refacciones")
-    }, 4500);
+    if (response.status === "success") {
+      setTimeout(() => {
+        navigate("/refacciones");
+      }, 2000);
+    }
   }
 
   //CONVERT IMG TO BASE64
@@ -145,7 +150,17 @@ export default function UploadImage() {
       <>
         {imagenPreviw ? (
           <div>
-            <img className="mx-auto w-40" src={imagenPreviw} alt="img" />
+                 <button
+            className="w-8 h-8 rounded-full bg-gray-800 transition-colors hover:bg-red-500 text-white"
+              onClick={() => {
+                setImagen("");
+                setImagenPreview("");
+              }}
+            >
+
+              X
+            </button>
+              <img className="mx-auto w-40" src={imagenPreviw} alt="img" />
           </div>
         ) : (
           <div className="flex items-center justify-center w-full">
@@ -191,6 +206,71 @@ export default function UploadImage() {
     );
   }
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
+    getInfoRefaccion();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  async function getInfoRefaccion() {
+    const response = await getRefaccionID(params.id);
+    setRefaccionEdit(response.refaccion);
+    console.log(response.refaccion);
+  }
+
+  async function handleUpdate(e) {
+    e.preventDefault();
+    console.log("Envio de datos");
+
+    //VALIDATION
+    if (!refaccion || !modelo || !marca || !calidad || !precio || !stock) {
+      mostrarAlerta({
+        msg: "Todos los campos son obligatorios",
+        error: true,
+      });
+
+      return;
+    }
+
+    //ENVIAR DATOS A SERVER
+    const response = await editService({
+      refaccion,
+      modelo,
+      marca,
+      calidad,
+      precio,
+      stock,
+    });
+    console.log(response);
+
+    if (response.status === "Error") {
+      console.log(response);
+      mostrarAlerta({
+        msg: "Error " + response.mensaje,
+        error: true,
+      });
+
+      return;
+    }
+
+    toast.promise(handleMessage, {
+      style: {
+        color: "white",
+      },
+      loading: "Loading...",
+      success: () => {
+        return `${response.mensaje}`;
+      },
+      error: "Error",
+    });
+
+    //REGRESAR A REFACCIONES
+    setTimeout(() => {
+      navigate("/refacciones");
+    }, 4500);
+  }
+
   return (
     <>
       <Toaster
@@ -204,7 +284,7 @@ export default function UploadImage() {
 
       <div className="md:w-1/2 mx-auto lg:w-2/5 mb-10">
         <form
-          onSubmit={handleSubmit}
+          onSubmit={refaccionEdit ? handleUpdate : handleSubmit}
           className="bg-white shadow-2xl rounded-lg py-10 px-5"
         >
           <legend className="font-black text-3xl text-center mb-10">
@@ -243,7 +323,9 @@ export default function UploadImage() {
                 msg && !modelo ? "border-red-400" : ""
               } border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md`}
               placeholder="12 PRO MAX "
-              value={modelo.toUpperCase()}
+              value={
+                refaccionEdit ? refaccionEdit.modelo : modelo.toUpperCase()
+              }
               onChange={(e) => setModelo(e.target.value.toUpperCase())}
             />
           </div>
@@ -299,7 +381,9 @@ export default function UploadImage() {
                 msg && !precio ? "border-red-400" : ""
               } border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md`}
               placeholder="Precio"
-              value={precio.toUpperCase()}
+              value={
+                refaccionEdit ? refaccionEdit.precio : precio.toUpperCase()
+              }
               onChange={(e) => setPrecio(e.target.value)}
             />
           </div>
@@ -318,7 +402,7 @@ export default function UploadImage() {
                 msg && !stock ? "border-red-400" : ""
               } border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md`}
               placeholder="3"
-              value={stock.toUpperCase()}
+              value={refaccionEdit ? refaccionEdit.stock : stock.toUpperCase()}
               onChange={(e) => setStock(e.target.value)}
             />
           </div>
@@ -334,7 +418,7 @@ export default function UploadImage() {
                 Agrega Imagen
               </h2>
             </div>
-            <div></div>
+
             <div>
               <UploadInput />
             </div>
@@ -343,7 +427,7 @@ export default function UploadImage() {
           <input
             type="submit"
             className="bg-green-700 w-full text-white uppercase font-bold p-3 hover:bg-green-800 cursor-pointer transition-colors"
-            value={"Agregar"}
+            value={refaccionEdit ? "ACTUALIZAR" : "Agregar"}
           />
         </form>
       </div>

@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 
+
 import { useEffect, useState } from "react";
 import ListCard from "../components/ListCard";
 import { listRefacciones, searchRefaccion } from "../API/events";
@@ -11,6 +12,7 @@ const Refacciones = () => {
   const [refacciones, setRefacciones] = useState([]);
   const [search, setSearch] = useState();
   const [reload, setReload] = useState(false);
+ 
 
   useEffect(() => {
     (async () => {
@@ -33,6 +35,7 @@ const Refacciones = () => {
 
   return (
     <>
+    
       <Toaster
         toastOptions={{
           style: { background: "green", color: "white" },
@@ -40,7 +43,7 @@ const Refacciones = () => {
           descriptionClassName: "my-toast-description",
         }}
       />
-      <div className="flex justify-end items-center gap-10 pr-10">
+      <div className="flex justify-end mt-10 items-center gap-10 pr-10">
         <Link
           className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
           to="/add-refaccion"
@@ -76,8 +79,10 @@ const Refacciones = () => {
             <input
               type="search"
               id="default-search"
-              className="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-500 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              placeholder="Display iPhone..."
+              className="block w-full p-4  pl-10 text-sm  border-b-2 border-gray-400
+              rounded-lg bg-gray-200
+
+"              placeholder="Display iPhone..."
               required
               value={search}
               onChange={(e) => setSearch(e.target.value)}

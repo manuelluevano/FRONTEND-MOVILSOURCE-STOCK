@@ -1,10 +1,9 @@
-//API
-// import { precioDolar } from "./API/events";
 
 import { Navigate } from "react-router-dom";
 
 import useAuth from "./hooks/useAuth";
 import { Toaster } from "sonner";
+import logo from "./assets/banner.webp";
 
 // import { useLoaderData } from "react-router-dom";
 
@@ -41,9 +40,8 @@ function App() {
       {tokenUser.id ? (
         <div>
           <>
-            <div>Estas Logueado</div>
+          <img className="mt-0" src={logo} />
 
-            <br />
           </>
         </div>
       ) : (
