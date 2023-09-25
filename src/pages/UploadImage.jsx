@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 // eslint-disable-next-line react/prop-types
 import Select from "react-select";
 import { useNavigate } from "react-router-dom";
-import { useParams } from "react-router-dom";
+// import { useParams } from "react-router-dom";
 
 //HELPERS
 import {
@@ -14,10 +14,10 @@ import {
 import useAuth from "../hooks/useAuth";
 import Error from "../components/Error";
 import { Toaster, toast } from "sonner";
-import { addNewRefaccion, editService, getRefaccionID } from "../API/events";
+import { addNewRefaccion } from "../API/events";
 
 export default function UploadImage() {
-  const params = useParams();
+  // const params = useParams();
 
   const navigate = useNavigate();
 
@@ -29,7 +29,7 @@ export default function UploadImage() {
   const [stock, setStock] = useState("");
   const [imagen, setImagen] = useState("");
   const [imagenPreviw, setImagenPreview] = useState(null);
-  const [refaccionEdit, setRefaccionEdit] = useState("");
+  // const [refaccionEdit, setRefaccionEdit] = useState("");
   //CONTEXT
   const { mostrarAlerta, alerta } = useAuth();
 
@@ -67,47 +67,50 @@ export default function UploadImage() {
     });
     console.log(response);
 
-    if (response.status === "Error") {
-      console.log(response);
-      mostrarAlerta({
-        msg: "Error " + response.mensaje,
-        error: true,
+    if (response) {
+      if (response.status === "Error") {
+        console.log(response);
+        mostrarAlerta({
+          msg: "Error " + response.mensaje,
+          error: true,
+        });
+
+        return;
+      }
+
+      toast.promise(handleMessage, {
+        style: {
+          color: "white",
+        },
+        loading: "Loading...",
+        success: () => {
+          return `${response.mensaje}`;
+        },
+        error: "Error",
       });
 
-      return;
-    }
-
-    toast.promise(handleMessage, {
-      style: {
-        color: "white",
-      },
-      loading: "Loading...",
-      success: () => {
-        return `${response.mensaje}`;
-      },
-      error: "Error",
-    });
-
-    if (response.status === "success") {
-      //reiniciar el formulario
-      setRefaccion("");
-      setModelo("");
-      setMarca("");
-      setCalidad("");
-      setPrecio("");
-      setStock("");
-      setImagen("");
-    }
-    //REGRESAR A REFACCIONES
-    if (response.status === "success") {
-      setTimeout(() => {
-        navigate("/refacciones");
-      }, 2000);
+      if (response.status === "success") {
+        //reiniciar el formulario
+        setRefaccion("");
+        setModelo("");
+        setMarca("");
+        setCalidad("");
+        setPrecio("");
+        setStock("");
+        setImagen("");
+        setImagenPreview(null);
+      }
+      //REGRESAR A REFACCIONES
+      if (response.status === "success") {
+        setTimeout(() => {
+          navigate("/refacciones");
+        }, 2000);
+      }
     }
   }
 
   //CONVERT IMG TO BASE64
-  const convertBase64 = (file) => {
+  async function convertBase64(file) {
     return new Promise((resolve, reject) => {
       const fileReader = new FileReader();
       fileReader.readAsDataURL(file);
@@ -120,7 +123,8 @@ export default function UploadImage() {
         reject(error);
       };
     });
-  };
+  }
+
   //MOSTRAR PREVIEW DE IMAGEN
   async function handleImageChange(e) {
     setImagenPreview(URL.createObjectURL(e.target.files[0]));
@@ -150,17 +154,16 @@ export default function UploadImage() {
       <>
         {imagenPreviw ? (
           <div>
-                 <button
-            className="w-8 h-8 rounded-full bg-gray-800 transition-colors hover:bg-red-500 text-white"
+            <button
+              className="w-8 h-8 rounded-full bg-gray-800 transition-colors hover:bg-red-500 text-white"
               onClick={() => {
                 setImagen("");
                 setImagenPreview("");
               }}
             >
-
               X
             </button>
-              <img className="mx-auto w-40" src={imagenPreviw} alt="img" />
+            <img className="mx-auto w-40" src={imagenPreviw} alt="img" />
           </div>
         ) : (
           <div className="flex items-center justify-center w-full">
@@ -185,8 +188,7 @@ export default function UploadImage() {
                   ></path>
                 </svg>
                 <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
-                  <span className="font-semibold">Click to upload</span> or drag
-                  and drop
+                  <span className="font-semibold">Click para subir </span>
                 </p>
                 <p className="text-xs text-gray-500 dark:text-gray-400">
                   SVG, PNG, JPG or GIF (MAX. 800x400px)
@@ -208,68 +210,68 @@ export default function UploadImage() {
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
 
-  useEffect(() => {
-    getInfoRefaccion();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  // useEffect(() => {
+  //   getInfoRefaccion();
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
 
-  async function getInfoRefaccion() {
-    const response = await getRefaccionID(params.id);
-    setRefaccionEdit(response.refaccion);
-    console.log(response.refaccion);
-  }
+  // async function getInfoRefaccion() {
+  //   const response = await getRefaccionID(params.id);
+  //   setRefaccionEdit(response.refaccion);
+  //   console.log(response.refaccion);
+  // }
 
-  async function handleUpdate(e) {
-    e.preventDefault();
-    console.log("Envio de datos");
+  // async function handleUpdate(e) {
+  //   e.preventDefault();
+  //   console.log("Envio de datos");
 
-    //VALIDATION
-    if (!refaccion || !modelo || !marca || !calidad || !precio || !stock) {
-      mostrarAlerta({
-        msg: "Todos los campos son obligatorios",
-        error: true,
-      });
+  //   //VALIDATION
+  //   if (!refaccion || !modelo || !marca || !calidad || !precio || !stock) {
+  //     mostrarAlerta({
+  //       msg: "Todos los campos son obligatorios",
+  //       error: true,
+  //     });
 
-      return;
-    }
+  //     return;
+  //   }
 
-    //ENVIAR DATOS A SERVER
-    const response = await editService({
-      refaccion,
-      modelo,
-      marca,
-      calidad,
-      precio,
-      stock,
-    });
-    console.log(response);
+  //   //ENVIAR DATOS A SERVER
+  //   const response = await addNewRefaccion({
+  //     refaccion,
+  //     modelo,
+  //     marca,
+  //     calidad,
+  //     precio,
+  //     stock,
+  //   });
+  //   console.log(response);
 
-    if (response.status === "Error") {
-      console.log(response);
-      mostrarAlerta({
-        msg: "Error " + response.mensaje,
-        error: true,
-      });
+  //   if (response.status === "Error") {
+  //     console.log(response);
+  //     mostrarAlerta({
+  //       msg: "Error " + response.mensaje,
+  //       error: true,
+  //     });
 
-      return;
-    }
+  //     return;
+  //   }
 
-    toast.promise(handleMessage, {
-      style: {
-        color: "white",
-      },
-      loading: "Loading...",
-      success: () => {
-        return `${response.mensaje}`;
-      },
-      error: "Error",
-    });
+  //   toast.promise(handleMessage, {
+  //     style: {
+  //       color: "white",
+  //     },
+  //     loading: "Loading...",
+  //     success: () => {
+  //       return `${response.mensaje}`;
+  //     },
+  //     error: "Error",
+  //   });
 
-    //REGRESAR A REFACCIONES
-    setTimeout(() => {
-      navigate("/refacciones");
-    }, 4500);
-  }
+  //   //REGRESAR A REFACCIONES
+  //   setTimeout(() => {
+  //     navigate("/refacciones");
+  //   }, 4500);
+  // }
 
   return (
     <>
@@ -282,25 +284,25 @@ export default function UploadImage() {
       />
       {/* formulario refaqccion */}
 
-      <div className="md:w-1/2 mx-auto lg:w-2/5 mb-10">
+      <div className="md:w-1/2 mx-auto lg:w-2/5 mb-10 mt-10">
         <form
-          onSubmit={refaccionEdit ? handleUpdate : handleSubmit}
+          onSubmit={handleSubmit}
           className="bg-white shadow-2xl rounded-lg py-10 px-5"
         >
-          <legend className="font-black text-3xl text-center mb-10">
+          <legend className="font-black text-3xl mt-5 text-center mb-10 text-gray-700">
             Registro de Refaccion
           </legend>
           {msg && <Error alerta={alerta} />}
           <div className="mb-5">
-            <label
-              htmlFor="marca"
+            <div
+              htmlFor="refaccion"
               className="block font-bold text-gray-700 uppercase"
             >
               Tipo de refaccion
-            </label>
+            </div>
 
             <Select
-              id="tipo"
+              id="refaccion"
               className={`${
                 msg && !refaccion ? "border-red-400 border-2" : ""
               } w-full  mt-2 placeholder-gray-400 rounded-md`}
@@ -323,20 +325,18 @@ export default function UploadImage() {
                 msg && !modelo ? "border-red-400" : ""
               } border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md`}
               placeholder="12 PRO MAX "
-              value={
-                refaccionEdit ? refaccionEdit.modelo : modelo.toUpperCase()
-              }
+              value={modelo.toUpperCase()}
               onChange={(e) => setModelo(e.target.value.toUpperCase())}
             />
           </div>
 
           <div className="mb-5">
-            <label
+            <div
               htmlFor="marca"
               className="block font-bold text-gray-700 uppercase"
             >
               Marca
-            </label>
+            </div>
 
             <Select
               id="marca"
@@ -350,12 +350,12 @@ export default function UploadImage() {
           </div>
 
           <div className="mb-5">
-            <label
+            <div
               htmlFor="calidad"
               className="block font-bold text-gray-700 uppercase"
             >
               Calidad
-            </label>
+            </div>
 
             <Select
               id="calidad"
@@ -380,10 +380,8 @@ export default function UploadImage() {
               className={`${
                 msg && !precio ? "border-red-400" : ""
               } border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md`}
-              placeholder="Precio"
-              value={
-                refaccionEdit ? refaccionEdit.precio : precio.toUpperCase()
-              }
+              placeholder="$250"
+              value={precio.toUpperCase()}
               onChange={(e) => setPrecio(e.target.value)}
             />
           </div>
@@ -402,7 +400,7 @@ export default function UploadImage() {
                 msg && !stock ? "border-red-400" : ""
               } border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md`}
               placeholder="3"
-              value={refaccionEdit ? refaccionEdit.stock : stock.toUpperCase()}
+              value={stock.toUpperCase()}
               onChange={(e) => setStock(e.target.value)}
             />
           </div>
@@ -412,8 +410,8 @@ export default function UploadImage() {
             <div>
               <h2
                 className={`${
-                  msg && !imagen ? "text-red-400 border-y-2 border-red-500" : ""
-                } text-center  text-4xl mb-5 font-extrabold   p-2 mt-2 placeholder-gray-400 rounded-md`}
+                  msg && !imagen ? "text-red-400 text-3xl" : ""
+                } text-center  text-2xl  mb-5 font-extrabold p-2 mt-2 placeholder-gray-400 rounded-md`}
               >
                 Agrega Imagen
               </h2>
@@ -427,7 +425,7 @@ export default function UploadImage() {
           <input
             type="submit"
             className="bg-green-700 w-full text-white uppercase font-bold p-3 hover:bg-green-800 cursor-pointer transition-colors"
-            value={refaccionEdit ? "ACTUALIZAR" : "Agregar"}
+            value={"Agregar"}
           />
         </form>
       </div>

@@ -12,15 +12,16 @@
   },
   "dependencies": {
     "@react-icons/all-files": "^4.1.0",
+    "axios": "^1.2.0",
     "jwt-decode": "^3.1.2",
     "react": "^18.2.0",
+    "react-data-table-component": "^7.5.4",
     "react-dom": "^18.2.0",
     "react-icons": "^4.10.1",
     "react-router-dom": "^6.14.2",
     "react-select": "^5.7.4",
     "sonner": "^0.7.0",
-    "update": "^0.4.2",
-    "axios": "^1.2.0"
+    "update": "^0.4.2"
   },
   "devDependencies": {
     "@types/react": "^18.2.15",

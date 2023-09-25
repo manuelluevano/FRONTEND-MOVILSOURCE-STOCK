@@ -7,7 +7,6 @@ import useAuth from "../hooks/useAuth";
 import { MdAccountCircle, MdExitToApp } from "react-icons/md";
 import { useLoaderData } from "react-router-dom";
 import { precioDolar } from "../API/events";
-import { useState } from "react";
 
 export async function loader() {
   // MULTIPLES CONSULTAS SIMULTANEAS
@@ -23,16 +22,8 @@ export async function loader() {
 }
 
 const Headers = () => {
-  // const [precio, setPrecio] = useState();
   const { setTokenUser, tokenUser } = useAuth();
-  const datos = useLoaderData();
-
-
-//   if (datos.precio1 == undefined) {
-//     console.log("no hayt datos");
-//     setPrecio("");
-// return
-//   }
+  let datos = useLoaderData();
 
   const navigate = useNavigate();
 
@@ -53,7 +44,7 @@ const Headers = () => {
 
           {Object.keys(tokenUser).length === 0 ? (
             <nav className="p-3 ml-5 ">
-              {/* <p className="mr-5 p-2 bg-orange-600 font-bold rounded-md uppercase text-white">
+              <p className="mr-5 p-2 bg-orange-600 font-bold rounded-md uppercase text-white">
                 {location.pathname === "/login" ? (
                   <Link
                     className={`${
@@ -77,11 +68,21 @@ const Headers = () => {
                     iniciar sesion
                   </Link>
                 )}
-              </p> */}
+              </p>
             </nav>
           ) : (
             <>
               <nav className="md:flex sm:text-center  items-center gap-10">
+                <Link
+                  className={`${
+                    location.pathname === "/reporteRefacciones"
+                      ? "text-orange-600"
+                      : "text-white"
+                  } uppercase cursor-pointe transition-colors`}
+                  to="/reporteRefacciones"
+                >
+                  Reporte
+                </Link>
                 <Link
                   className={`${
                     location.pathname === "/refacciones"
@@ -113,9 +114,11 @@ const Headers = () => {
                   Servicios
                 </Link>
 
-                <div className=" text-green-500">
-                  {/* {precio} */}
-                </div>
+                {
+                  <div className=" text-green-500">
+                    {datos && datos.precio1.base + datos.precio1.rates.MXN}
+                  </div>
+                }
                 <div className="flex items-center">
                   <Link
                     to="/perfil"

@@ -23,6 +23,8 @@ import Servicios from "./pages/Servicios";
 import Refacciones from "./pages/Refacciones";
 import Accesorios from "./pages/Accesorios";
 import UploadImage from "./pages/UploadImage";
+import ReporteRefacciones from "./pages/ReporteRefacciones";
+
 
 const router = createHashRouter([
   {
@@ -49,6 +51,11 @@ const router = createHashRouter([
       {
         path: "/perfil",
         element: <Perfil />,
+        errorElement: <ErrorElement />,
+      },
+      {
+        path: "/reporteRefacciones",
+        element: <ReporteRefacciones />,
         errorElement: <ErrorElement />,
       },
       {

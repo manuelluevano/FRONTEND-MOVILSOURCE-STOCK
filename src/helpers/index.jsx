@@ -288,6 +288,10 @@ export const refacciones = [
     label: "REPUESTO TORNILLOS",
     value: "REPUESTO TORNILLOS",
   },
+  {
+    label: "VIBRADOR",
+    value: "VIBRADOR",
+  },
 ];
 export const calidades = [
   {

@@ -3,13 +3,11 @@ import { useState } from "react";
 import { MdModeEdit } from "react-icons/md";
 
 const User = ({ tokenUser }) => {
-  const [name, setName] = useState("")
-  const [surname, setSurname] = useState("")
-  const [email, setEmail] = useState("")
+  const [name, setName] = useState("");
+  const [surname, setSurname] = useState("");
+  const [email, setEmail] = useState("");
 
-async function  handleTerminar () {
-
-}
+  async function handleTerminar() {}
 
   return (
     <>
@@ -24,7 +22,7 @@ async function  handleTerminar () {
                 className="text-black border-2  p-2 mt-2 placeholder-gray-400 rounded-md bg-gray-100"
                 type="text"
                 value={name ? name : tokenUser.name}
-                onChange={(e)=>  setName(e.target.value)}
+                onChange={(e) => setName(e.target.value)}
               />
               <MdModeEdit className="text-2xl" />
             </div>
@@ -34,7 +32,7 @@ async function  handleTerminar () {
                 className="text-black border-2 p-2 mt-2 placeholder-gray-400 rounded-md bg-gray-100"
                 type="text"
                 value={surname ? surname : tokenUser.surname}
-                onChange={(e)=>  setSurname(e.target.value)}
+                onChange={(e) => setSurname(e.target.value)}
               />
 
               <MdModeEdit className="text-2xl" />
@@ -45,7 +43,7 @@ async function  handleTerminar () {
                 className="text-black border-2 p-2 mt-2 placeholder-gray-400 rounded-md bg-gray-100"
                 type="text"
                 value={email ? email : tokenUser.email}
-                onChange={(e)=>  setEmail(e.target.value)}
+                onChange={(e) => setEmail(e.target.value)}
               />
               <MdModeEdit className="text-2xl" />
             </div>

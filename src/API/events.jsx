@@ -342,8 +342,8 @@ export async function editService(id, objterminado) {
       },
     };
 
-    // const url = `https://lovely-duck-spacesuit.cyclic.app/api/service/servicio/${id}`;
-    const url = `http://localhost:3000/api/refaccion/refaccion/${id}`;
+    const url = `https://lovely-duck-spacesuit.cyclic.app/api/service/servicio/${id}`;
+    // const url = `http://localhost:3000/api/refaccion/refaccion/${id}`;
     const response = await fetch(url, requestOptions);
     const result = await response.json();
     return result;
