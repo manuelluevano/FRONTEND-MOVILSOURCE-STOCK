@@ -8,4 +8,8 @@ export default defineConfig({
   define: {
     global: "globalThis",
   },
+  build:{
+    target: "esnext" // or "es2019",
+
+   }
 })

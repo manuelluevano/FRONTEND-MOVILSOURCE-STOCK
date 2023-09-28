@@ -3,7 +3,7 @@ import * as XLSX from "xlsx/xlsx.mjs";
 
 // eslint-disable-next-line react/prop-types
 const DownloadBtn = ({ data = [], fileName }) => {
-  console.log(data);
+  // console.log(data);
   return (
     <button
       className="download-btn"
