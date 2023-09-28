@@ -1,15 +1,66 @@
 /* eslint-disable react/prop-types */
 
-import { Link } from "react-router-dom";
+import { handleDate, handleMessage } from "../helpers";
+import { createReports } from "../API/events";
+import { Toaster, toast } from "sonner";
 
 const Card = ({ item }) => {
   const { _id, imagen, refaccion, modelo, marca, calidad, precio, stock } =
     item;
 
+  const handleCreateReport = async (id, stock) => {
+    //REVISAR CANTIDAD DE ELEEMENTOS VENDIDOS
+    if (stock > 0) {
+      console.log(stock);
+      //GENERAMOS REPORTE
+
+      console.log("Select", id);
+
+      //OBTENER FECHA
+      const f = await handleDate();
+      console.log(f);
+
+      const response = await createReports(id, f);
+      console.log(response);
+
+      if (response) {
+        toast.promise(handleMessage, {
+          style: {
+            color: "white",
+          },
+          loading: "Loading...",
+          success: () => {
+            return `${response.mensaje}`;
+          },
+          error: "Error",
+        });
+      }
+
+      //RECARGAR
+      setTimeout(() => {
+        window.location.reload(true);
+      }, 4000);
+    }
+  };
+
   return (
     <>
-      <div className="mt-10 mr-5 p-1 max-w-xs border border-gray-200 rounded-lg shadow  hover:bg-slate-100 cursor-pointer">
+      <Toaster
+        toastOptions={{
+          style: { background: "green", color: "white" },
+          className: "my-toast",
+          descriptionClassName: "my-toast-description",
+        }}
+      />
+      <div
+        className={`${
+          stock == 0 ? "opacity-30" : ""
+        } mt-10 mr-5  p-1 max-w-xs border border-gray-200 rounded-lg shadow  hover:bg-slate-100 cursor-pointer`}
+      >
         <div className="hover:p-1">
+          {stock == 0 && (
+            <h1 className="text-center text-4xl text-red-700">Agotada</h1>
+          )}
           <img
             className="text-center "
             src={`${imagen}`}
@@ -33,19 +84,17 @@ const Card = ({ item }) => {
           <div className="flex items-center justify-between mt-3">
             <span className="text-3xl font-bold text-black ">${precio}</span>
 
-            <Link
-              className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-              to={`/add-refaccion/${_id}`}
-            >
-              Editar
-            </Link>
-            <button
-              onClick={() => console.log("seleccionado", _id)}
-              href="#refacciones"
-              className="text-white bg-blue-700 hover:bg-blue-800  focus:outline-none focus:ring-blue-300 rounded-lg text-xs px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-            >
-              Vender
-            </button>
+            {stock == 0 ? (
+              ""
+            ) : (
+              <button
+                onClick={() => handleCreateReport(_id, stock)}
+                href="#refacciones"
+                className="text-white bg-blue-700 hover:bg-blue-800  focus:outline-none focus:ring-blue-300 rounded-lg text-xs px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              >
+                Vender
+              </button>
+            )}
           </div>
         </div>
       </div>

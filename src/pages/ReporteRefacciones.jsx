@@ -1,45 +1,13 @@
-import DataTable from "react-data-table-component"
-
+import TanStackTable from "../components/TanStackTable";
 
 const ReporteRefacciones = () => {
-    const columns = [
-        {
-            name: 'Refaccion',
-            selector: row => row.name,
-            sortable: true
-        },
-        {
-            name: 'Precio',
-            selector: row => row.email,
-            sortable: true
-
-        }
-    ]
-    const data = [
-        {
-            id: 1,
-            name: 'juan',
-            email: "a@gmai.com"
-        },
-        {
-            id: 2,
-            name: 'jose',
-            email: "12@gmai.com"
-        }
-    ]
   return (
-    <div className="container mt-5">
-        <DataTable
-        columns={columns}
-        data={data}
-        selectableRows
-        fixedHeader
-        pagination
-        >
+    <>
+      <div className="pt-4 min-h-screen bg-gray-800">
+        <TanStackTable />
+      </div>
+    </>
+  );
+};
 
-        </DataTable>
-    </div>
-  )
-}
-
-export default ReporteRefacciones
+export default ReporteRefacciones;

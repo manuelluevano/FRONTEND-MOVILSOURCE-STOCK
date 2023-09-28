@@ -30,6 +30,8 @@ export async function handleDate() {
   return formattedToday;
 }
 
+
+
 export const marcas = [
   {
     label: "IPHONE",

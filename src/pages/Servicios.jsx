@@ -58,7 +58,7 @@ const Servicios = () => {
         }}
       />
       {tokenUser.id ? (
-        <div className="container mx-auto">
+        <div className="container mx-auto ">
           <div className="mt-12 md:flex">
             <FormularioServicio
               fecha={datos}

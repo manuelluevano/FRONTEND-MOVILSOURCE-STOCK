@@ -251,7 +251,6 @@ export async function listRefacciones() {
   }
 }
 export async function getRefaccionID(id) {
-
   try {
     var requestOptions = {
       method: "get",
@@ -376,6 +375,63 @@ export async function searchRefaccion(search) {
   }
 }
 
+// REPORTS
+export async function listReports() {
+  //GET TOKEN
+  // const token = localStorage.getItem("token");
+  // let finalString = token.split('"').join("");
+  try {
+    var requestOptions = {
+      method: "GET",
+      redirect: "follow",
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+        Authorization: `eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjY1MGQzMTU1ZmEyMjg5ZDQzNjFmODIwYSIsIm5hbWUiOiJtYW51ZWwiLCJzdXJuYW1lIjoibHVldmFubyIsImVtYWlsIjoibWFudWVsQGdtYWlsLmNvbSIsInJvbGUiOiJyb2xlX3VzZXIiLCJpbWFnZW4iOiJkZWZhdWx0LnBuZyIsImlhdCI6MTY5NTcwNzk0OCwiZXhwIjoxNjk4Mjk5OTQ4fQ.DwY9J55Yw0Y_BW05bPExstYmV2pY72fXbVC6w0VkDgQ`,
+      },
+    };
+
+    // const url = `http://localhost:3000/api/reporte/refacciones`;
+    const url = `https://lovely-duck-spacesuit.cyclic.app/api/reporte/refacciones`;
+
+    const response = await fetch(url, requestOptions);
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    console.log("error search", error);
+  }
+}
+export async function createReports(refaccion, fecha) {
+
+  const token = localStorage.getItem("token");
+
+  let finalString = token.split('"').join("");
+
+  console.log("token modificado", finalString);
+
+  try {
+    var requestOptions = {
+      method: "POST",
+      redirect: "follow",
+      body: JSON.stringify({
+        refaccion,
+        fecha,
+      }),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+        Authorization: `${finalString}`,
+      },
+    };
+
+    // const url = `http://localhost:3000/api/reporte/refaccion`;
+    const url = `https://lovely-duck-spacesuit.cyclic.app/api/reporte/refaccion`;
+
+    const response = await fetch(url, requestOptions);
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    console.log("error login", error);
+  }
+}
 //PRECIO DOLAR
 export async function precioDolar() {
   try {

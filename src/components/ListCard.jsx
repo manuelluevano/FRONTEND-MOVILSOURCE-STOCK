@@ -9,6 +9,7 @@ const ListCard = ({ refacciones }) => {
       {refacciones && refacciones.length ? (
         <>
           {refacciones.map((item) => {
+            console.log(item);
             return (
               <>
                 <Card item={item} />
