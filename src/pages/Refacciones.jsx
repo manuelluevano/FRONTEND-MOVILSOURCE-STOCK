@@ -1,25 +1,25 @@
 /* eslint-disable react/prop-types */
 
-
 import { useEffect, useState } from "react";
 import ListCard from "../components/ListCard";
 import { listRefacciones, searchRefaccion } from "../API/events";
 import { Link } from "react-router-dom";
 import { Toaster } from "sonner";
+import {  PacmanLoader } from "react-spinners";
 
 const Refacciones = () => {
   //OBTENER LAS REFACCIONES DE LA DB
   const [refacciones, setRefacciones] = useState([]);
   const [search, setSearch] = useState();
   const [reload, setReload] = useState(false);
- 
+  let [loading, setLoading] = useState(false);
 
   useEffect(() => {
     (async () => {
       if (search) {
         // console.log("search, VALOR", search);
         const response = await searchRefaccion(search);
-        setRefacciones()
+        setRefacciones();
         setRefacciones(response.refacciones);
       } else {
         const response = await listRefacciones();
@@ -31,11 +31,10 @@ const Refacciones = () => {
         setReload(false);
       }, 4000);
     })();
-  }, [ search,reload , setReload]);
+  }, [search, reload, setReload]);
 
   return (
     <>
-    
       <Toaster
         toastOptions={{
           style: { background: "green", color: "white" },
@@ -82,7 +81,8 @@ const Refacciones = () => {
               className="block w-full p-4  pl-10 text-sm  border-b-2 border-gray-400
               rounded-lg bg-gray-200
 
-"              placeholder="Display iPhone..."
+"
+              placeholder="Display iPhone..."
               required
               value={search}
               onChange={(e) => setSearch(e.target.value)}
@@ -90,11 +90,25 @@ const Refacciones = () => {
           </div>
         </div>
       </div>
-      <h2 className="font-black mt-10 mb-5 text-4xl text-center">
-        Lista de Refacciones
+      <h2 className="font-black mt-10 mb-20 text-4xl text-center">
+        {loading ? "Realizando Venta..." : "Lista de Refacciones"}
       </h2>
       <div className=" flex-wrap flex justify-center md:flex mx-8">
-        <ListCard refacciones={refacciones} />
+        {loading ? (
+          <PacmanLoader
+            loading={loading}
+            size={40}
+            color={"#cc6b03"}
+            aria-label="Loading Spinner"
+            data-testid="loader"
+          />
+        ) : (
+          <ListCard
+            refacciones={refacciones}
+            loading={loading}
+            setLoading={setLoading}
+          />
+        )}
       </div>
     </>
   );

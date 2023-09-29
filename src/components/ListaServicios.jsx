@@ -1,4 +1,5 @@
 /* eslint-disable react/prop-types */
+import { PacmanLoader } from "react-spinners";
 import Servicio from "./Servicio";
 const ListaServicios = ({
   listaServicios,
@@ -108,6 +109,12 @@ const ListaServicios = ({
           <p className="text-lg mt-5 text-center mb-10">
             Agregar tus{" "}
             <span className="text-orange-700 font-bold ">Servicios</span>
+            <PacmanLoader
+              size={40}
+              color={"#cc6b03"}
+              aria-label="Loading Spinner"
+              data-testid="loader"
+            />
           </p>
         </>
       )}

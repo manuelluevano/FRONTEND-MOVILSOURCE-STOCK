@@ -271,6 +271,10 @@ export const refacciones = [
     value: "RSIM",
   },
   {
+    label: "QPE",
+    value: "QPE",
+  },
+  {
     label: "BANDEJA DE SIM",
     value: "BANDEJA DE SIM",
   },

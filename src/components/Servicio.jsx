@@ -151,6 +151,10 @@ const Servicio = ({ item }) => {
       setReload(true);
     };
 
+    const handleCancelar = async (id) => {
+      console.log(id);
+    };
+
     return (
       <>
         {item && (
@@ -387,6 +391,15 @@ const Servicio = ({ item }) => {
                 </button>
               )}
 
+              {!item.status && (
+                <button
+                  className="py-2 px-10 border-2 border-red-600 text-black hover:bg-red-600  hover:text-white font-bold uppercase rounded-lg"
+                  onClick={() => handleCancelar(item)}
+                >
+                  Cancelar Servicio
+                </button>
+              )}
+
               {edit ? (
                 ""
               ) : (
@@ -396,7 +409,7 @@ const Servicio = ({ item }) => {
                   className={
                     item.status
                       ? ""
-                      : "py-2 px-10 bg-red-600 hover:bg-red-700 text-white font-bold uppercase rounded-lg"
+                      : "py-2 px-10 bg-blue-600 hover:bg-blue-700 text-white font-bold uppercase rounded-lg"
                   }
                   onClick={() => handleTerminar(item)}
                 >

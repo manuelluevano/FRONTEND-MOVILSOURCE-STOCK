@@ -53,9 +53,9 @@ const TanStackTable = () => {
       cell: (info) => <span>{info.getValue()}</span>,
       header: "Modelo",
     }),
-    columnHelper.accessor("refaccion.stock", {
-      cell: (info) => <span>{info.getValue()}</span>,
-      header: "Stock",
+    columnHelper.accessor("", {
+      cell: () => <span>{1}</span>,
+      header: "Venta",
     }),
     columnHelper.accessor("refaccion.calidad", {
       cell: (info) => <span>{info.getValue()}</span>,

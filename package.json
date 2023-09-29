@@ -22,6 +22,7 @@
     "react-icons": "^4.10.1",
     "react-router-dom": "^6.14.2",
     "react-select": "^5.7.4",
+    "react-spinners": "^0.13.8",
     "sonner": "^0.7.0",
     "update": "^0.4.2",
     "xlsx": "^0.18.5"

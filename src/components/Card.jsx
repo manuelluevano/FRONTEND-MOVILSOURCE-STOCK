@@ -4,42 +4,43 @@ import { handleDate, handleMessage } from "../helpers";
 import { createReports } from "../API/events";
 import { Toaster, toast } from "sonner";
 
-const Card = ({ item }) => {
+const Card = ({ item, setLoading }) => {
   const { _id, imagen, refaccion, modelo, marca, calidad, precio, stock } =
     item;
 
   const handleCreateReport = async (id, stock) => {
     //REVISAR CANTIDAD DE ELEEMENTOS VENDIDOS
     if (stock > 0) {
-      console.log(stock);
       //GENERAMOS REPORTE
+      const confirm = window.confirm("Vender Refaccion?");
 
-      console.log("Select", id);
+      if (confirm) {
+        setLoading(true);
+        //OBTENER FECHA
+        const f = await handleDate();
+        console.log(f);
 
-      //OBTENER FECHA
-      const f = await handleDate();
-      console.log(f);
+        const response = await createReports(id, f);
+        console.log(response);
 
-      const response = await createReports(id, f);
-      console.log(response);
-
-      if (response) {
-        toast.promise(handleMessage, {
-          style: {
-            color: "white",
-          },
-          loading: "Loading...",
-          success: () => {
-            return `${response.mensaje}`;
-          },
-          error: "Error",
-        });
+        if (response) {
+          toast.promise(handleMessage, {
+            style: {
+              color: "white",
+            },
+            loading: "Loading...",
+            success: () => {
+              return `${response.mensaje}`;
+            },
+            error: "Error",
+          });
+        }
+        //RECARGAR
+        setTimeout(() => {
+          setLoading(false);
+          window.location.reload(true);
+        }, 4000);
       }
-
-      //RECARGAR
-      setTimeout(() => {
-        window.location.reload(true);
-      }, 4000);
     }
   };
 
