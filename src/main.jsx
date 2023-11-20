@@ -17,13 +17,14 @@ import Headers from "./components/Headers.jsx";
 //PAGES
 import App from "./App.jsx";
 import Login from "./pages/Login.jsx";
-import Register from "./pages/Register.jsx";
 import Perfil from "./pages/Perfil";
 import Servicios from "./pages/Servicios";
-import Refacciones from "./pages/Refacciones";
-import Accesorios from "./pages/Accesorios";
-import UploadImage from "./pages/UploadImage";
-import ReporteRefacciones from "./pages/ReporteRefacciones";
+import Local from "./pages/Local.jsx"
+// import Register from "./pages/Register.jsx";
+// import Refacciones from "./pages/Refacciones";
+// import Accesorios from "./pages/Accesorios";
+// import UploadImage from "./pages/UploadImage";
+// import ReporteRefacciones from "./pages/ReporteRefacciones";
 
 
 const router = createHashRouter([
@@ -44,8 +45,8 @@ const router = createHashRouter([
         errorElement: <ErrorElement />,
       },
       {
-        path: "/register",
-        element: <Register />,
+        path: "/local",
+        element: <Local />,
         errorElement: <ErrorElement />,
       },
       {
@@ -54,32 +55,33 @@ const router = createHashRouter([
         errorElement: <ErrorElement />,
       },
       {
-        path: "/reporteRefacciones",
-        element: <ReporteRefacciones />,
-        errorElement: <ErrorElement />,
-      },
-      {
-        path: "/refacciones",
-        element: <Refacciones />,
-        errorElement: <ErrorElement />,
-      },
-      {
-        path: "/accesorios",
-        element: <Accesorios />,
-        errorElement: <ErrorElement />,
-      },
-      {
         path: "/servicios",
         element: <Servicios />,
         errorElement: <ErrorElement />,
         loader: serviceLoader
       },
-      {
-        path: "/add-refaccion/:id?",
-        element: <UploadImage />,
-        errorElement: <ErrorElement />,
-        // loader: serviceLoader
-      },
+      // {
+      //   path: "/reporteRefacciones",
+      //   element: <ReporteRefacciones />,
+      //   errorElement: <ErrorElement />,
+      // },
+      // {
+      //   path: "/refacciones",
+      //   element: <Refacciones />,
+      //   errorElement: <ErrorElement />,
+      // },
+      // {
+      //   path: "/accesorios",
+      //   element: <Accesorios />,
+      //   errorElement: <ErrorElement />,
+      // },
+     
+      // {
+      //   path: "/add-refaccion/:id?",
+      //   element: <UploadImage />,
+      //   errorElement: <ErrorElement />,
+      //   // loader: serviceLoader
+      // },
       
     ],
   },

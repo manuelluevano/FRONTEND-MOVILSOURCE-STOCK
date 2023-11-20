@@ -16,7 +16,7 @@ export async function loader() {
 }
 
 const Servicios = () => {
-  const { reload, setReload } = useAuth();
+  const { reload, setReload, localSelect, } = useAuth();
 
   const datos = useLoaderData();
 
@@ -36,7 +36,7 @@ const Servicios = () => {
       } else {
         const token = localStorage.getItem("token");
         //OBTENER LISTA DE SERVICIOS
-        const response = await listServices(token);
+        const response = await listServices(token,localSelect);
         setListaServicios(response);
       }
       //REGRESAR RELOAD A ESTADO NORMAL
@@ -57,7 +57,7 @@ const Servicios = () => {
           descriptionClassName: "my-toast-description",
         }}
       />
-      {tokenUser.id ? (
+      {tokenUser.id && localSelect !== undefined ? (
         <div className="container mx-auto ">
           <div className="mt-12 md:flex">
             <FormularioServicio
@@ -77,7 +77,7 @@ const Servicios = () => {
           </div>
         </div>
       ) : (
-        <Navigate to="/" />
+        <Navigate to="/login" />
       )}
     </>
   );

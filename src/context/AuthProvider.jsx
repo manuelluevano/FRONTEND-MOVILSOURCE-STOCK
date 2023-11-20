@@ -3,7 +3,12 @@ import jwt_decode from "jwt-decode";
 import { useState, createContext, useEffect } from "react";
 
 //API
-import { addService, loginApi, registerApi, serviceComplete } from "../API/events";
+import {
+  addService,
+  loginApi,
+  registerApi,
+  serviceComplete,
+} from "../API/events";
 
 const AuthContext = createContext();
 
@@ -11,12 +16,12 @@ const AuthContext = createContext();
 const AuthProvider = ({ children }) => {
   const [alerta, setAlerta] = useState([]);
   const [tokenUser, setTokenUser] = useState({});
-  const [ setUserRegister] = useState({});
+  const [localSelect, setLocalSelect] = useState();
+  const [setUserRegister] = useState({});
 
   const [cargando, setCargando] = useState(false);
   //RECAREGAR LISTA DE SERVICIOS
   const [reload, setReload] = useState(false);
-
 
   //REVISAR SI HAY LOCALSTORAGE
   useEffect(() => {
@@ -42,15 +47,15 @@ const AuthProvider = ({ children }) => {
 
       if (response.status === "error") {
         setCargando(false);
-        return response
+        return response;
       }
 
-        const userDecode = jwt_decode(response.token);
+      const userDecode = jwt_decode(response.token);
       console.log("Response Decode", userDecode);
       setTokenUser(userDecode);
-      setCargando(false)
+      setLocalSelect(userLogin.local)
+      setCargando(false);
       return response;
-      
     } catch (error) {
       console.log(error);
     }
@@ -114,18 +119,15 @@ const AuthProvider = ({ children }) => {
     }
   };
 
-  const terminarServicio = async(id) =>{
-
+  const terminarServicio = async (id) => {
     try {
-      const response = await serviceComplete(
-        id
-      )
+      const response = await serviceComplete(id);
 
       return response;
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 
   //REFACCIONES
 
@@ -137,13 +139,15 @@ const AuthProvider = ({ children }) => {
         mostrarAlerta,
         alerta,
         tokenUser,
+        localSelect,
+        setLocalSelect,
         loginUser,
         registerUser,
         setTokenUser,
         addNewService,
         terminarServicio,
         setReload,
-        reload
+        reload,
       }}
     >
       {children}

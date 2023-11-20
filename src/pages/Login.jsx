@@ -1,19 +1,20 @@
-
+import { Navigate } from "react-router-dom";
 import FormularioLogin from "../components/FormularioLogin";
 import useAuth from "../hooks/useAuth";
-import { Navigate } from "react-router-dom";
 
 const Login = () => {
-  const { tokenUser } = useAuth();
+  const { tokenUser, localSelect } = useAuth();
+  console.log(localSelect);
   return (
     <>
-    
-      {tokenUser.id? (
-       <Navigate to='/'/>
-      ) : (
+      {!tokenUser.id ? (
         <div className="mt-20">
           <FormularioLogin />
         </div>
+      ) : (
+        <>
+          <Navigate to="/local" />
+        </>
       )}
     </>
   );

@@ -1,4 +1,3 @@
-
 import { Navigate } from "react-router-dom";
 
 import useAuth from "./hooks/useAuth";
@@ -37,16 +36,8 @@ function App() {
           descriptionClassName: "my-toast-description",
         }}
       />
-      {tokenUser.id ? (
-        <div>
-          <>
-          <img className="mt-0" src={logo} />
 
-          </>
-        </div>
-      ) : (
-        <Navigate to="/login" />
-      )}
+      {!tokenUser.id ? <Navigate to="/login" /> : <Navigate to="/local" />}
     </>
   );
 }

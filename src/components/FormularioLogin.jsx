@@ -33,7 +33,7 @@ const FormularioLogin = () => {
     }
 
     //INCIAMOS SESION
-    const response = await loginUser({ email, password });
+    const response = await loginUser({ email, password});
 
     // console.log(response);
     toast.promise(handleMessage, {
@@ -63,6 +63,8 @@ const FormularioLogin = () => {
 
       //GUARDAMOS SESION EN LOCALSTORAGE
       localStorage.setItem("token", JSON.stringify(response.token));
+
+
     }, 2000);
   };
 

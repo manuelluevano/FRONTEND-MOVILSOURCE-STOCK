@@ -292,24 +292,21 @@ const Servicio = ({ item }) => {
                 )}
               </span>
             </div>
-            {abono == 0 ? (
-              ""
-            ) : (
-              <div className="font-bold mb-3 text-gray-700 uppercase">
-                Abono:{abono === precio ? " " : " $"}
-                <span className="font-normal normal-case">
-                  {edit ? (
-                    <input
-                      type="text"
-                      value={abonoNew.toUpperCase()}
-                      onChange={(e) => setAbono(e.target.value.toUpperCase())}
-                    />
-                  ) : (
-                    abono
-                  )}
-                </span>
-              </div>
-            )}
+
+            <div className="font-bold mb-3 text-gray-700 uppercase">
+              Abono: ${""}
+              <span className="font-normal normal-case">
+                {edit ? (
+                  <input
+                    type="text"
+                    value={abonoNew.toUpperCase()}
+                    onChange={(e) => setAbono(e.target.value.toUpperCase())}
+                  />
+                ) : (
+                  abono
+                )}
+              </span>
+            </div>
 
             <div className="font-bold mb-3 text-gray-700 uppercase">
               Folio: {""}
@@ -329,15 +326,20 @@ const Servicio = ({ item }) => {
               Observaciones: {""}
               <span className="font-normal normal-case">
                 {edit ? (
-                  <input
-                    type="text"
+                  <textarea
+                    id="observaciones"
+                    className="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
                     value={observacionesNew.toUpperCase()}
                     onChange={(e) =>
                       setObservaciones(e.target.value.toUpperCase())
                     }
                   />
                 ) : (
-                  observaciones
+                  <textarea
+                    className="w-full mt-2"
+                    value={observaciones}
+                    disabled
+                  ></textarea>
                 )}
               </span>
             </div>
@@ -345,17 +347,23 @@ const Servicio = ({ item }) => {
               Fecha: {""}
               <span className="font-normal normal-case">{fecha}</span>
             </div>
-            <div className="font-bold mb-3 text-gray-700 uppercase">
+            {/* <div className="font-bold mb-3 text-gray-700 uppercase">
               Tecnico / Vendedor: {""}
-              <span
+              {/* {user.email ?  <span
                 className={`${
                   tokenUser.email === user.email ? "text-green-700" : ""
                 } normal-case`}
               >
                 {user.email}{" "}
-              </span>
-            </div>
-            <div className="flex  ">
+              </span> :   } */}
+
+              {/* {!user.email ?  "desconocido" :  user.email } */}
+              {/* {user.email && (
+                user.email
+              )} */}
+              
+            {/* </div>  */}
+            <div className="flex">
               <div className="font-bold  text-gray-700 uppercase">Estado: </div>
               <div className="font-bold  text-gray-700 uppercase">
                 {status ? (
@@ -383,7 +391,6 @@ const Servicio = ({ item }) => {
               ) : (
                 <button
                   type="button"
-                  // disabled
                   className="py-2 px-10 border-2 border-green-600 text-black hover:bg-green-600  hover:text-white font-bold uppercase rounded-lg"
                   onClick={() => handleEdit()}
                 >

@@ -12,6 +12,10 @@ const ListaServicios = ({
   setServiceEdit,
   serviceEdit,
 }) => {
+  const handlePendientes = async () => {
+    console.log("Pendiente");
+  };
+
   return (
     <div className="md:w-1/2 lg:w-3/5 mt-10 h-screen md:overflow-y-scroll">
       {reload && (
@@ -20,19 +24,41 @@ const ListaServicios = ({
         </p>
       )}
 
-      <p className="text-right mr-2 ">
-        Total:
-        <span className="ml-2 text-2xl">{contador}</span>
+<p className="text-right mr-2  mt-4 mb-4">
+      <button
+          type="button"
+          className="py=2 p-2  text-black hover:bg-gray-600 hover:text-white  rounded-lg"
+          onClick={() => handlePendientes()}
+        >
+          Total:
+          <span className=" ml-2 text-gray-700 text-2xl hover:text-white">
+            {contador}
+          </span>
+        </button>
       </p>
-      <p className="text-right mr-2 mb-1">
-        Finalizados:
-        <span className=" ml-2 text-green-700 text-2xl">
-          {servicesFinished}
-        </span>
+      <p className="text-right mr-2  mt-4 mb-4">
+      <button
+          type="button"
+          className="py=2 p-2  text-black hover:bg-green-600 hover:text-white  rounded-lg"
+          onClick={() => handlePendientes()}
+        >
+          Finalizados:
+          <span className=" ml-2 text-green-700 text-2xl hover:text-white">
+            {servicesFinished}
+          </span>
+        </button>
       </p>
-      <p className="text-right mr-2 mb-1">
-        Pendientes:
-        <span className=" ml-2 text-red-700 text-2xl">{servicesPendient}</span>
+      <p className="text-right mr-2  mt-4 mb-4">
+        <button
+          type="button"
+          className="py=2 p-2  text-black hover:bg-red-400 hover:text-white  rounded-lg"
+          onClick={() => handlePendientes()}
+        >
+          Pendientes:
+          <span className=" ml-2 text-red-700 text-2xl hover:text-white">
+            {servicesPendient}
+          </span>
+        </button>
       </p>
       {/* BUSCADOR */}
       <div className="text-lg mb-5">
