@@ -53,7 +53,7 @@ const AuthProvider = ({ children }) => {
       const userDecode = jwt_decode(response.token);
       console.log("Response Decode", userDecode);
       setTokenUser(userDecode);
-      setLocalSelect(userLogin.local)
+      setLocalSelect(userLogin.local);
       setCargando(false);
       return response;
     } catch (error) {
@@ -103,7 +103,8 @@ const AuthProvider = ({ children }) => {
         service.fecha,
         service.folio,
         service.observaciones,
-        service.token
+        service.token,
+        service.localSelect
       );
 
       if (response) {

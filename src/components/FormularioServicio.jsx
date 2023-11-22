@@ -9,7 +9,7 @@ import Error from "./Error";
 import { toast } from "sonner";
 
 // eslint-disable-next-line react/prop-types
-const FormularioServicio = ({ fecha }) => {
+const FormularioServicio = ({ fecha,localSelect }) => {
   const [nombre, setNombre] = useState("");
   const [telefono, setTelefono] = useState("");
   const [servicio, setServicio] = useState("");
@@ -65,6 +65,7 @@ const FormularioServicio = ({ fecha }) => {
       folio,
       observaciones,
       token,
+      localSelect,
     });
 
     if (response.status === "Error") {
@@ -100,6 +101,7 @@ const FormularioServicio = ({ fecha }) => {
     setAbono("");
     setFolio("");
     setObservaciones("");
+    
 
     //RECARGAR LA LISTA DE SERVICIOS
     setReload(true);

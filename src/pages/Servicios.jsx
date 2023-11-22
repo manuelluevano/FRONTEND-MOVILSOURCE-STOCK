@@ -36,7 +36,7 @@ const Servicios = () => {
       } else {
         const token = localStorage.getItem("token");
         //OBTENER LISTA DE SERVICIOS
-        const response = await listServices(token,localSelect);
+        const response = await listServices(token);
         setListaServicios(response);
       }
       //REGRESAR RELOAD A ESTADO NORMAL
@@ -57,14 +57,16 @@ const Servicios = () => {
           descriptionClassName: "my-toast-description",
         }}
       />
-      {tokenUser.id && localSelect !== undefined ? (
+      {tokenUser.id && localSelect !== 0 ? (
         <div className="container mx-auto ">
           <div className="mt-12 md:flex">
             <FormularioServicio
               fecha={datos}
+              localSelect={localSelect}
             />
 
             <ListaServicios
+            localSelect={localSelect}
               listaServicios={listaServicios.services}
               contador={listaServicios.contador}
               servicesPendient={listaServicios.servicesPendient}

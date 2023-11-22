@@ -34,7 +34,7 @@ const FormularioLogin = () => {
 
                 <Link
                   onClick={() => {
-                    setLocalSelect(0);
+                    setLocalSelect(undefined);
                   }}
                   className="inline-flex mt-5 items-center px-3 py-2 text-sm font-medium text-center text-white  bg-orange-800 rounded-lg hover:bg-orange-900 "
                   to="/servicios"

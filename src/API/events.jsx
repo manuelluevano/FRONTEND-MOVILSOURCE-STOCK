@@ -63,7 +63,8 @@ export async function addService(
   fecha,
   folio,
   observaciones,
-  token
+  token,
+  localSelect
 ) {
   console.log("token", token);
 
@@ -88,6 +89,7 @@ export async function addService(
         fecha,
         folio,
         observaciones,
+        local: localSelect,
       }),
       headers: {
         "Content-type": "application/json; charset=UTF-8",
@@ -96,6 +98,7 @@ export async function addService(
     };
 
     const url = `https://lovely-duck-spacesuit.cyclic.app/api/service/servicio`;
+    // const url = `http://localhost:3000/api/service/servicio`;
 
     const response = await fetch(url, requestOptions);
     const result = await response.json();
@@ -117,8 +120,7 @@ export async function listServices(token) {
       },
     };
 
-
- const     url = `https://lovely-duck-spacesuit.cyclic.app/api/service/servicios`;
+     const     url = `https://lovely-duck-spacesuit.cyclic.app/api/service/servicios`;
     // const url = `http://localhost:3000/api/service/servicios`;
     const response = await fetch(url, requestOptions);
     const result = await response.json();

@@ -21,10 +21,11 @@ const Servicio = ({ item }) => {
     folio,
     status,
     observaciones,
-    user,
+    local
   } = item;
 
-  const { terminarServicio, setReload, reload, tokenUser, mostrarAlerta } =
+
+  const { terminarServicio, setReload, reload, mostrarAlerta } =
     useAuth();
 
   const [edit, setEdit] = useState(false);
@@ -320,6 +321,12 @@ const Servicio = ({ item }) => {
                 ) : (
                   folio
                 )}
+              </span>
+            </div>
+            <div className="font-bold mb-3 text-gray-700 uppercase">
+              Local: {""}
+              <span className="font-normal normal-case">
+                {local}
               </span>
             </div>
             <div className="font-bold mb-3 text-gray-700 uppercase">
