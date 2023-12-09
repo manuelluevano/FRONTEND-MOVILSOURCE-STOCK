@@ -6,22 +6,22 @@ import { useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import { MdAccountCircle, MdExitToApp } from "react-icons/md";
 // import { useLoaderData } from "react-router-dom";
-import { precioDolar } from "../API/events";
+// import { precioDolar } from "../API/events";
 
 const local = 0;
 
-export async function loader() {
-  // MULTIPLES CONSULTAS SIMULTANEAS
+// export async function loader() {
+//   // MULTIPLES CONSULTAS SIMULTANEAS
 
-  const [precio1, precio2] = await Promise.all([precioDolar(), precioDolar()]);
+//   // const [precio1, precio2] = await Promise.all([precioDolar(), precioDolar()]);
 
-  const data = {
-    precio1,
-    precio2,
-  };
+//   // const data = {
+//   //   precio1,
+//   //   precio2,
+//   // };
 
-  return data;
-}
+//   // return data;
+// }
 
 const Headers = () => {
   const { setTokenUser, tokenUser } = useAuth();

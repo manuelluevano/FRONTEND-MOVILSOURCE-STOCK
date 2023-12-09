@@ -7,7 +7,7 @@ import "./index.css";
 import { AuthProvider } from "./context/AuthProvider.jsx";
 
 //LOADERS
-import { loader as appLoader } from "./components/Headers";
+// import { loader as appLoader } from "./components/Headers";
 import { loader as serviceLoader } from "./pages/Servicios";
 
 //COMPONENTS
@@ -31,7 +31,7 @@ const router = createHashRouter([
   {
     path: "/",
     element: <Headers />,
-    loader: appLoader,
+    // loader: appLoader,
     errorElement: <ErrorElement />,
     children: [
       {

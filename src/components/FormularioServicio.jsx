@@ -133,7 +133,7 @@ const FormularioServicio = ({ fecha,localSelect }) => {
             className="bg-white shadow-2xl rounded-lg py-10 px-5"
           >
             <legend className="font-black text-3xl text-center mb-10">
-              Registro de Servicio
+              Registro de Servicio 
             </legend>
             {msg && <Error alerta={alerta} />}
 

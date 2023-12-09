@@ -16,14 +16,13 @@ export async function loader() {
 }
 
 const Servicios = () => {
-  const { reload, setReload, localSelect, } = useAuth();
+  const { reload, setReload, localSelect } = useAuth();
 
   const datos = useLoaderData();
 
   const { tokenUser } = useAuth();
   const [listaServicios, setListaServicios] = useState([]);
   const [search, setSearch] = useState();
-
 
   useEffect(() => {
     (async () => {
@@ -46,8 +45,6 @@ const Servicios = () => {
     })();
   }, [reload, search, setReload]);
 
-
-
   return (
     <>
       <Toaster
@@ -60,13 +57,10 @@ const Servicios = () => {
       {tokenUser.id && localSelect !== 0 ? (
         <div className="container mx-auto ">
           <div className="mt-12 md:flex">
-            <FormularioServicio
-              fecha={datos}
-              localSelect={localSelect}
-            />
+            <FormularioServicio fecha={datos} localSelect={localSelect} />
 
             <ListaServicios
-            localSelect={localSelect}
+              localSelect={localSelect}
               listaServicios={listaServicios.services}
               contador={listaServicios.contador}
               servicesPendient={listaServicios.servicesPendient}
